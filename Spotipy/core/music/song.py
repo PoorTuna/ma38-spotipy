@@ -1,4 +1,7 @@
+from typing import List
+
+
 class Song:
-    def __init__(self, popularity: int = 0, genre: str = ""):
+    def __init__(self, popularity: int = 0, genres: List[str] = []):
         self.popularity = popularity
-        self.genre = genre
+        self.genres = genres
