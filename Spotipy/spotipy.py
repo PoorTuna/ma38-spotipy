@@ -13,4 +13,4 @@ class Spotipy:
         self.song_manager = song_manager if song_manager is not None else SpotipySongManager()
         self.search_engine = search_engine if search_engine is not None else SpotipySearch(self.song_manager)
 
-        logger.add(ManagerConstants.logs_path, rotation="12:00")
+        logger.add(ManagerConstants.logs_path, rotation="10 mb")

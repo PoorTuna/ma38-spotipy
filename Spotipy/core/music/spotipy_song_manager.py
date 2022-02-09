@@ -50,13 +50,15 @@ class SpotipySongManager:
 
     def __add_album(self, album, song):
         if album["id"] in self.albums:
-            logger.debug("Adding a new album...")
+            logger.debug("Trying to add a new song with the album...")
             if song.name not in [song_name.name for song_name in self.albums[album["id"]][0]]:
                 self.albums[album["id"]][0].append(song)
+                logger.success("Added a new song!")
             else:
                 logger.warning("Song already exists...")
-            logger.success("Added a new album!")
         else:
+            logger.debug("Adding a new album...")
             self.albums[album["id"]] = []
             self.albums[album["id"]].append([song])  # songs list
             self.albums[album["id"]].append(Album(*album.values()))
+            logger.success("Added a new album!")
