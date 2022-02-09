@@ -8,22 +8,27 @@ class SpotipySearch:
         self.song_manager = song_manager
 
     def get_artists(self):
+        logger.debug("Getting artist objects...")
         return [self.song_manager.artists[artist] for artist in self.song_manager.artists]
 
     def get_artist_albums(self, artist_id):
+        logger.debug(f"Getting artist's albums from id = {artist_id}...")
         return [self.song_manager.albums[album_id] for album_id in self.song_manager.artists[artist_id].album_ids]
 
     def get_top_songs(self, artist_id):
+        logger.debug(logger.debug(f"Getting top songs from artist id = {artist_id}..."))
         songs_list = []
         for album_id in self.song_manager.artists[artist_id].album_ids:
             for song in self.song_manager.albums[album_id][0]:
                 songs_list.append(song)
         songs_list = list(dict.fromkeys(songs_list))  # might not be needed?
-
+        logger.success("Got the list filled with the artist's top songs!")
+        logger.debug("Sorting the top artist's songs list...")
         return sorted([song for song in songs_list],
                       key=lambda x: x.popularity)[:SearchConstants.most_popular_songs_count]
 
     def get_album_songs(self, album_id):
+        logger.debug(logger.debug(f"Getting every song from album id = {album_id}..."))
         return self.song_manager.albums[album_id][0]
 
     # TODO : Implement genres (find where is the definition of a song genre??).

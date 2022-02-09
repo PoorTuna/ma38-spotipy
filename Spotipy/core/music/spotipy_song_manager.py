@@ -1,5 +1,7 @@
 from typing import Dict
 
+from loguru import logger
+
 from Spotipy.core.exceptions.spotipy_music_exceptions import SpotipyInvalidSongFormatException
 from Spotipy.core.music.album import Album
 from Spotipy.core.music.artist import Artist
@@ -21,9 +23,11 @@ class SpotipySongManager:
         # TODO : Might have to prevent the same song from being created again (if that's possible)
         try:
             if dictionary["track"]["id"] not in self.songs:
+                logger.debug("Adding a new song...")
                 self.songs[dictionary["track"]["id"]] = Song(dictionary["track"]["id"], dictionary["track"]["name"],
                                                              dictionary["track"]["popularity"],
                                                              dictionary["track"]["album"]["id"])
+                logger.success("Added a new song!")
 
             temp_song = self.songs[dictionary["track"]["id"]]
 
@@ -39,15 +43,19 @@ class SpotipySongManager:
 
                 if temp_artist not in temp_song.artists:
                     temp_song.artists.append(temp_artist)
+
         except KeyError:
+            logger.error("Got an invalid song format!")
             raise SpotipyInvalidSongFormatException
 
     def __add_album(self, album, song):
         if album["id"] in self.albums:
+            logger.debug("Adding a new album...")
             if song.name not in [song_name.name for song_name in self.albums[album["id"]][0]]:
                 self.albums[album["id"]][0].append(song)
             else:
-                print("already exists")
+                logger.warning("Song already exists...")
+            logger.success("Added a new album!")
         else:
             self.albums[album["id"]] = []
             self.albums[album["id"]].append([song])  # songs list
