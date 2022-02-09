@@ -12,7 +12,8 @@ class SpotipySearch:
 
     def get_artists(self):
         logger.debug("Getting artist objects...")
-        if isinstance(SpotipyUserManager.CurrentUser.curr_user, SpotipyFreeUser):
+        if isinstance(SpotipyUserManager.CurrentUser.curr_user,
+                      SpotipyFreeUser) or SpotipyUserManager.CurrentUser is None:
             return [self.song_manager.artists[artist] for artist in self.song_manager.artists][
                    :SearchConstants.free_user_search_limit]
 
@@ -20,7 +21,8 @@ class SpotipySearch:
 
     def get_artist_albums(self, artist_id):
         logger.debug(f"Getting artist's albums from id = {artist_id}...")
-        if isinstance(SpotipyUserManager.CurrentUser.curr_user, SpotipyFreeUser):
+        if isinstance(SpotipyUserManager.CurrentUser.curr_user,
+                      SpotipyFreeUser) or SpotipyUserManager.CurrentUser is None:
             return [self.song_manager.albums[album_id] for album_id in self.song_manager.artists[artist_id].album_ids][
                    :SearchConstants.free_user_search_limit]
 
@@ -35,7 +37,8 @@ class SpotipySearch:
         songs_list = list(dict.fromkeys(songs_list))  # might not be needed?
         logger.success("Got the list filled with the artist's top songs!")
         logger.debug("Sorting the top artist's songs list...")
-        if isinstance(SpotipyUserManager.CurrentUser.curr_user, SpotipyFreeUser) or :
+        if isinstance(SpotipyUserManager.CurrentUser.curr_user,
+                      SpotipyFreeUser) or SpotipyUserManager.CurrentUser is None:
             return sorted([song for song in songs_list],
                           key=lambda x: x.popularity)[:SearchConstants.most_popular_songs_count][
                    :SearchConstants.free_user_search_limit]
