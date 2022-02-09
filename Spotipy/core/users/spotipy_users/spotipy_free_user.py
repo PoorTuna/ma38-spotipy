@@ -1,3 +1,5 @@
+from Spotipy.core.exceptions.spotipy_users_exceptions import SpotipyMusicPlaylistCountException, \
+    SpotipyMusicPlaylistNameExistsException
 from Spotipy.core.users.spotipy_users.spotipy_user import SpotipyUser
 
 
@@ -7,8 +9,8 @@ class SpotipyFreeUser(SpotipyUser):
 
     def add_playlist(self, playlist_name):
         if len(self.playlists) <= 5:
-            pass  # raise an exception
+            raise SpotipyMusicPlaylistCountException
         if playlist_name in self.playlists:
-            pass  # raise an exception
+            raise SpotipyMusicPlaylistNameExistsException
 
         self.playlists[playlist_name] = []
