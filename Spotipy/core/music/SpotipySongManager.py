@@ -3,7 +3,6 @@ from typing import Dict
 from Spotipy.core.music.album import Album
 from Spotipy.core.music.artist import Artist
 from Spotipy.core.music.song import Song
-from Spotipy.core.parser.parser_examples.json_parser import JsonParser
 
 
 class SpotipySongManager:
