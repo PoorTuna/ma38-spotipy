@@ -2,6 +2,7 @@ from Spotipy.core.music.spotipy_song_manager import SpotipySongManager
 from Spotipy.config.constants import SearchConstants
 from loguru import logger
 
+
 class SpotipySearch:
     def __init__(self, song_manager: SpotipySongManager):
         self.song_manager = song_manager
@@ -17,6 +18,7 @@ class SpotipySearch:
         for album_id in self.song_manager.artists[artist_id].album_ids:
             for song in self.song_manager.albums[album_id][0]:
                 songs_list.append(song)
+        songs_list = list(dict.fromkeys(songs_list))  # might not be needed?
 
         return sorted([song for song in songs_list],
                       key=lambda x: x.popularity)[:SearchConstants.most_popular_songs_count]

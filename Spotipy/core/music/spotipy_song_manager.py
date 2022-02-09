@@ -10,6 +10,7 @@ class SpotipySongManager:
     def __init__(self):
         self.albums = {}
         self.artists = {}
+        self.songs = {}
 
     def add_song(self, dictionary: Dict[str, str]):
         """
@@ -19,26 +20,34 @@ class SpotipySongManager:
         """
         # TODO : Might have to prevent the same song from being created again (if that's possible)
         try:
-            temp_song = Song(dictionary["track"]["id"], dictionary["track"]["name"], dictionary["track"]["popularity"],
-                             dictionary["track"]["album"]["id"])
+            if dictionary["track"]["id"] not in self.songs:
+                self.songs[dictionary["track"]["id"]] = Song(dictionary["track"]["id"], dictionary["track"]["name"],
+                                                             dictionary["track"]["popularity"],
+                                                             dictionary["track"]["album"]["id"])
+
+            temp_song = self.songs[dictionary["track"]["id"]]
 
             self.__add_album(dictionary["track"]["album"], temp_song)
 
             for artist in dictionary["track"]["artists"]:
                 if artist["id"] not in self.artists:
-                    self.artists[artist["id"]] = Artist(*artist)
+                    self.artists[artist["id"]] = Artist(*artist.values())
 
                 temp_artist = self.artists[artist["id"]]
-                temp_artist.album_ids.append(dictionary["track"]["album"]["id"])
+                if dictionary["track"]["album"]["id"] not in temp_artist.album_ids:
+                    temp_artist.album_ids.append(dictionary["track"]["album"]["id"])
 
-                temp_song.artists.append(temp_artist)
+                if temp_artist not in temp_song.artists:
+                    temp_song.artists.append(temp_artist)
         except KeyError:
             raise SpotipyInvalidSongFormatException
 
     def __add_album(self, album, song):
         if album["id"] in self.albums:
-            self.albums[album["id"]][0].append(song)
-
+            if song.name not in [song_name.name for song_name in self.albums[album["id"]][0]]:
+                self.albums[album["id"]][0].append(song)
+            else:
+                print("already exists")
         else:
             self.albums[album["id"]] = []
             self.albums[album["id"]].append([song])  # songs list
