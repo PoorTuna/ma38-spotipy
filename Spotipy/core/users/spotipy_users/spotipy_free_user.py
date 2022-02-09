@@ -8,4 +8,7 @@ class SpotipyFreeUser(SpotipyUser):
     def add_playlist(self, playlist_name):
         if len(self.playlists) <= 5:
             pass  # raise an exception
+        if playlist_name in self.playlists:
+            pass  # raise an exception
+
         self.playlists[playlist_name] = []
