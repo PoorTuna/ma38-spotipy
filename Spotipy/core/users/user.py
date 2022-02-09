@@ -1,4 +1,5 @@
 import bcrypt
+from loguru import logger
 
 
 class User:
@@ -7,4 +8,5 @@ class User:
         self.password = bcrypt.hashpw(password.encode(), bcrypt.gensalt())
 
     def validate_password(self, password):
+        logger.debug(f"Login attempt as {self.username}. Checking password validity...")
         return bcrypt.checkpw(password.encode(), self.password)

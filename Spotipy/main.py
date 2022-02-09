@@ -1,10 +1,3 @@
-import json
-import os
-
-from Spotipy.config.constants import ManagerConstants
-from Spotipy.spotipy import Spotipy
-
-
 def main():
     my_spotipy = Spotipy()
 
@@ -25,4 +18,10 @@ def main():
 
 
 if __name__ == '__main__':
+    import json
+    import os
+
+    from Spotipy.config.constants import ManagerConstants
+    from Spotipy.spotipy import Spotipy
+
     main()

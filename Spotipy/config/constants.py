@@ -10,5 +10,5 @@ class SearchConstants:
 
 
 class ManagerConstants:
-    logs_path = r"../Resources/Logs/data.log"
+    logs_path = r"../Resources/Logs/spotipy.log"
     songs_path = r"../Resources/Music/Songs"
