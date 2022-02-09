@@ -8,6 +8,6 @@ class SpotipyPremiumUser(SpotipyUser):
 
     def add_playlist(self, playlist_name):
         if playlist_name in self.playlists:
-            raise  SpotipyMusicPlaylistNameExistsException
+            raise SpotipyMusicPlaylistNameExistsException
 
         self.playlists[playlist_name] = []
