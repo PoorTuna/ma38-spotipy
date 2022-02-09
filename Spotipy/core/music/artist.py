@@ -1,7 +1,5 @@
 from typing import List
 
-from Spotipy.core.music.album import Album
-
 
 class Artist:
     def __init__(self, artist_id: str, name: str, album_ids: List[str] = []):

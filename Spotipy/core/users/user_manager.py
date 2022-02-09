@@ -1,9 +1,6 @@
-from collections import namedtuple
-
-
 class UserManager:
     def __init__(self):
-        self.users = {}  # {username : UserObj}
+        self.users = {}
 
     class CurrentUser:
         curr_user = None
