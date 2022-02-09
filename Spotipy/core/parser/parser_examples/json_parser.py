@@ -1,6 +1,4 @@
 import os
-
-from Spotipy.core.parser.parser import Parser
 from json import load
 
 
@@ -9,7 +7,7 @@ class JsonParser:
         pass
 
     @staticmethod
-    def parse(path):
+    def parse(path: str):
         if os.path.exists(path):
             with open(path, "r") as file_fd:
                 return load(file_fd)
