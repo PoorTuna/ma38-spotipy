@@ -1,6 +1,6 @@
 from Spotipy.core.music.spotipy_song_manager import SpotipySongManager
 from Spotipy.config.constants import SearchConstants
-
+from loguru import logger
 
 class SpotipySearch:
     def __init__(self, song_manager: SpotipySongManager):
