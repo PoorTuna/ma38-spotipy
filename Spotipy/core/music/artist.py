@@ -4,7 +4,7 @@ from Spotipy.core.music.album import Album
 
 
 class Artist:
-    def __init__(self, id: str, name: str, albums: List[Album] = []):
+    def __init__(self, artist_id: str, name: str, albums: List[Album] = []):
         self.albums = albums
-        self.id = id
+        self.id = artist_id
         self.name = name
