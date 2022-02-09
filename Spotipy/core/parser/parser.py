@@ -1,10 +1,11 @@
 class Parser:
     def __init__(self):
-        pass
+        raise NotImplementedError
 
     def parse(self, path):
         """
-        This function gets a file path and parses it into a list of objects
-        :param path: 
+        This function gets a file path and parses it into a dictionary
+        :param path: the path of the file
         :return:
         """
+        pass
