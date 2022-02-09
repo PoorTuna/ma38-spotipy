@@ -2,6 +2,9 @@ from Spotipy.core.music.spotipy_song_manager import SpotipySongManager
 from Spotipy.config.constants import SearchConstants
 from loguru import logger
 
+from Spotipy.core.users.spotipy_users.spotipy_free_user import SpotipyFreeUser
+from Spotipy.core.users.spotipy_users.spotipy_user_manager import SpotipyUserManager
+
 
 class SpotipySearch:
     def __init__(self, song_manager: SpotipySongManager):
@@ -9,10 +12,18 @@ class SpotipySearch:
 
     def get_artists(self):
         logger.debug("Getting artist objects...")
+        if isinstance(SpotipyUserManager.CurrentUser.curr_user, SpotipyFreeUser):
+            return [self.song_manager.artists[artist] for artist in self.song_manager.artists][
+                   :SearchConstants.free_user_search_limit]
+
         return [self.song_manager.artists[artist] for artist in self.song_manager.artists]
 
     def get_artist_albums(self, artist_id):
         logger.debug(f"Getting artist's albums from id = {artist_id}...")
+        if isinstance(SpotipyUserManager.CurrentUser.curr_user, SpotipyFreeUser):
+            return [self.song_manager.albums[album_id] for album_id in self.song_manager.artists[artist_id].album_ids][
+                   :SearchConstants.free_user_search_limit]
+
         return [self.song_manager.albums[album_id] for album_id in self.song_manager.artists[artist_id].album_ids]
 
     def get_top_songs(self, artist_id):
@@ -24,6 +35,11 @@ class SpotipySearch:
         songs_list = list(dict.fromkeys(songs_list))  # might not be needed?
         logger.success("Got the list filled with the artist's top songs!")
         logger.debug("Sorting the top artist's songs list...")
+        if isinstance(SpotipyUserManager.CurrentUser.curr_user, SpotipyFreeUser) or :
+            return sorted([song for song in songs_list],
+                          key=lambda x: x.popularity)[:SearchConstants.most_popular_songs_count][
+                   :SearchConstants.free_user_search_limit]
+
         return sorted([song for song in songs_list],
                       key=lambda x: x.popularity)[:SearchConstants.most_popular_songs_count]
 
