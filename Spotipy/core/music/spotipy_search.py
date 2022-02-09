@@ -1,5 +1,3 @@
-import operator
-
 from Spotipy.core.music.spotipy_song_manager import SpotipySongManager
 from Spotipy.config.constants import SearchConstants
 
