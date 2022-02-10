@@ -17,7 +17,7 @@ class ManagerConstants:
     logs_path = r"../Resources/Logs/spotipy.log"
     songs_path = r"../Resources/Music/Songs"
 
-    if os.path.exists(os.path.dirname(os.path.abspath(__file__)) + r"\spotipy.ini"):
+    if os.path.exists(r"spotipy.ini"):
         try:
             with open("spotipy.ini", "r") as spotipy_fd:
                 logs_path = next(spotipy_fd)
