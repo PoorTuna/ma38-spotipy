@@ -8,6 +8,3 @@ class SpotipyUser(User):
 
     def add_playlist(self, playlist_name):
         pass
-
-
-print(isinstance(SpotipyUser('xd', "man"), SpotipyUser))

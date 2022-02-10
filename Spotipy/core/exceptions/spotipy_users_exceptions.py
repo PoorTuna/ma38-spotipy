@@ -7,3 +7,7 @@ class SpotipyMusicPlaylistCountException(SpotipyException):
 
 class SpotipyMusicPlaylistNameExistsException(SpotipyException):
     pass
+
+
+class SpotipyUsernameAlreadyExistsException(SpotipyException):
+    pass
