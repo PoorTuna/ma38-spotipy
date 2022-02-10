@@ -41,13 +41,15 @@ class SpotipySongManager:
             raise SpotipyInvalidSongFormatException
 
     def __add_album(self, album, song):
+        """
+        This function creates a new album if not exists.
+        :param album: The album dict to be added.
+        :param song: The song object that needs to be added too if the album already exists.
+        :return: None
+        """
         if album["id"] in self.albums:
-            logger.debug("Trying to add a new song with the album...")
-            if song.name not in [song_name.name for song_name in self.albums[album["id"]][0]]:
-                self.albums[album["id"]][0].append(song)
-                logger.success("Added a new song!")
-            else:
-                logger.warning("Song already exists...")
+            self.__add_song(song, album)
+
         else:
             logger.debug("Adding a new album...")
             self.albums[album["id"]] = []
@@ -65,3 +67,11 @@ class SpotipySongManager:
 
         if temp_artist not in song.artists:
             song.artists.append(temp_artist)
+
+    def __add_song(self, song, album):
+        logger.debug("Trying to add a new song with the album...")
+        if song.name not in [song_name.name for song_name in self.albums[album["id"]][0]]:
+            self.albums[album["id"]][0].append(song)
+            logger.success("Added a new song!")
+        else:
+            logger.warning("Song already exists...")
