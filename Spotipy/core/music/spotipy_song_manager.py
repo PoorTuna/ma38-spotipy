@@ -20,7 +20,7 @@ class SpotipySongManager:
         :param dictionary: the dictionary formatted song.
         :return: None
         """
-        # TODO : Might have to prevent the same song from being created again (if that's possible)
+
         try:
             if dictionary["track"]["id"] not in self.songs:
                 logger.debug("Adding a new song...")
