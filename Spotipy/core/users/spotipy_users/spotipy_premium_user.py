@@ -1,6 +1,6 @@
 from loguru import logger
 
-from Spotipy.core.exceptions.spotipy_users_exceptions import SpotipyMusicPlaylistNameExistsException
+from Spotipy.core.exceptions.spotipy_music_exceptions import SpotipyMusicPlaylistNameExistsException
 from Spotipy.core.users.spotipy_users.spotipy_user import SpotipyUser
 
 

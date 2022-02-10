@@ -1,6 +1,3 @@
-from Spotipy.core.users.spotipy_users.spotipy_user import SpotipyUser
-
-
 class UserManager:
     def __init__(self):
         self.users = {}
