@@ -10,5 +10,17 @@ class SearchConstants:
 
 
 class ManagerConstants:
+    import os
+
+    from Spotipy.core.exceptions.spotipy_config_exceptions import SpotipyInvalidConfigFile
+
     logs_path = r"../Resources/Logs/spotipy.log"
     songs_path = r"../Resources/Music/Songs"
+
+    if os.path.exists(os.path.dirname(os.path.abspath(__file__)) + r"\spotipy.ini"):
+        try:
+            with open("spotipy.ini", "r") as spotipy_fd:
+                logs_path = next(spotipy_fd)
+                songs_path = next(spotipy_fd)
+        except StopIteration:
+            raise SpotipyInvalidConfigFile
