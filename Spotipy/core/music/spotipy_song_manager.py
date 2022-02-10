@@ -58,6 +58,13 @@ class SpotipySongManager:
             logger.success("Added a new album!")
 
     def __create_artist(self, artist, album_id, song):
+        """
+        This function gets an artist, a song and an album and initializes a new artist.
+        :param artist: The artist dict
+        :param album_id: Album id to be added
+        :param song: Song object that adds the artist to itself.
+        :return: None
+        """
         if artist["id"] not in self.artists:
             self.artists[artist["id"]] = Artist(*artist.values())
 
@@ -69,6 +76,12 @@ class SpotipySongManager:
             song.artists.append(temp_artist)
 
     def __add_song(self, song, album):
+        """
+        This function gets a song and an album and adds the song to the album.
+        :param song: The song object to be added.
+        :param album: The album to be manipulated
+        :return: None
+        """
         logger.debug("Trying to add a new song with the album...")
         if song.name not in [song_name.name for song_name in self.albums[album["id"]][0]]:
             self.albums[album["id"]][0].append(song)
