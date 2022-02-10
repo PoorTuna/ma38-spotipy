@@ -1,23 +1,35 @@
 from consolemenu import *
 from consolemenu.items import *
 
+from Spotipy.spotipy import Spotipy
+
+
+def login_input():
+    username = input("Enter a username : ")
+    password = input("Enter a password : ")
+
+    return [username, password]
+
 
 def spotipy_console():
-    # Create a menu
+    # Main Menu:
+    my_spotipy = Spotipy()
     menu = ConsoleMenu("Spotipy", "Main Menu")
 
-    menu_item = MenuItem("menu item test")
+    # menu_item = MenuItem("menu item test")
     func_item = FunctionItem("Running a command", input, ["Enter an input"])
-    command_item = CommandItem("Run a console command", "color a")
+    # command_item = CommandItem("Run a console command", "color a")
 
     selection_menu = SelectionMenu(["1 M", "2 M ", "3 M"])
 
-    submenu_menu = SubmenuItem("Submenu spotipy", selection_menu, menu)
+    # Login Menu:
 
-    menu.append_item(menu_item)
-    menu.append_item(func_item)
-    menu.append_item(command_item)
-    menu.append_item(submenu_menu)
+    login_menu = FunctionItem("Sign In", login_input)
+
+    register_menu = SubmenuItem("Sign Up", selection_menu, menu)
+
+    menu.append_item(login_menu)
+    menu.append_item(register_menu)
 
     menu.show()
 
