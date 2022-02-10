@@ -27,3 +27,7 @@ def user_class():
 
 def spotipy_console_menu():
     from Spotipy.console_menu import main
+
+
+def spotipy_flask_menu():
+    from Spotipy.flask.main import spotipy_flask_server

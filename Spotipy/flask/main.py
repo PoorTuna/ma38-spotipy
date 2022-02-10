@@ -51,8 +51,8 @@ if __name__ == '__main__':
 
     my_spotipy = Spotipy()
     logger.debug("Adding songs to the Spotipy instance...")
-    for file in os.listdir("../" + ManagerConstants.songs_path):
-        with open("../" + ManagerConstants.songs_path + "/" + file, "r") as file_fd:
+    for file in os.listdir(ManagerConstants.songs_path):
+        with open(ManagerConstants.songs_path + "/" + file, "r") as file_fd:
             my_spotipy.song_manager.add_song(json.load(file_fd))
     logger.success("Successfully added set of songs!")
 

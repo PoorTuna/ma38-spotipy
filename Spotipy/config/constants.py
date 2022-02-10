@@ -24,7 +24,6 @@ class ManagerConstants:
                 logs_path = next(spotipy_fd)
                 songs_path = next(spotipy_fd)
                 user_db_path = next(spotipy_fd)
-                print(user_db_path)
 
         except StopIteration:
             raise SpotipyInvalidConfigFile

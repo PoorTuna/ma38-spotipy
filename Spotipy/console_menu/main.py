@@ -46,4 +46,5 @@ def spotipy_console():
     menu.show()
 
 
-spotipy_console()
+if __name__ == '__main__':
+    spotipy_console()

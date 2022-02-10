@@ -54,7 +54,5 @@ class SpotipySearch:
             return self.song_manager.albums[album_id][0][:SearchConstants.free_user_search_limit]
         return self.song_manager.albums[album_id][0]
 
-    # TODO : Implement genres (find where is the definition of a song genre??).
-    # TODO : Implement get top genre songs function with constant variables
     def get_top_genre_songs(self, genre_name: str):
         pass
