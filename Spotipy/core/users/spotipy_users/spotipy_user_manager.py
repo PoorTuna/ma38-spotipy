@@ -30,3 +30,6 @@ class SpotipyUserManager(UserManager):
 
             else:
                 logger.warning(f"A login attempt has been made with : {username} . Incorrect Password!")
+
+        else:
+            logger.error(f'User "{username}" does not exist!')

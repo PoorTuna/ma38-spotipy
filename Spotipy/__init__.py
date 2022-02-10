@@ -13,8 +13,6 @@ from Spotipy.core.exceptions import *
 
 from Spotipy.config.constants import *
 
-from Spotipy.console_menu.main import *
-
 
 def spotipy_music_class():
     from Spotipy.core.music.song import Song
@@ -25,3 +23,7 @@ def spotipy_music_class():
 def user_class():
     from Spotipy.core.users.user import User
     from Spotipy.core.users.user_manager import UserManager
+
+
+def spotipy_console_menu():
+    from Spotipy.console_menu import main
