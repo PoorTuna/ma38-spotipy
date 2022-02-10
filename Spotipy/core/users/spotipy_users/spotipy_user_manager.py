@@ -1,6 +1,3 @@
-import json
-import os
-
 from loguru import logger
 
 from Spotipy.core.users.spotipy_users.spotipy_artist_user import SpotipyArtistUser
@@ -8,13 +5,11 @@ from Spotipy.core.users.spotipy_users.spotipy_free_user import SpotipyFreeUser
 from Spotipy.core.users.spotipy_users.spotipy_premium_user import SpotipyPremiumUser
 from Spotipy.core.users.user_manager import UserManager
 from Spotipy.core.exceptions.spotipy_users_exceptions import SpotipyUsernameAlreadyExistsException
-from Spotipy.config.constants import ManagerConstants
 
 
 class SpotipyUserManager(UserManager):
     def __init__(self):
         super().__init__()
-        # self.sync_user_db()
 
     def signup(self, username: str, password: str, premium: bool = False, artist: bool = True):
         super().signup(username, password)
@@ -30,14 +25,6 @@ class SpotipyUserManager(UserManager):
         else:
             self.users[username] = SpotipyArtistUser(username, password)
 
-        if os.path.exists(ManagerConstants.user_db_path):
-            with open(ManagerConstants.user_db_path, "a") as spotipy_fd:
-                dict_temp = self.users[username].__dict__
-                spotipy_fd.write(json.dumps(self.users[username].__dict__) + "\n")
-        else:
-            with open(ManagerConstants.user_db_path, "w") as spotipy_fd:
-                spotipy_fd.write(self.users[username].__dict__ + "\n")
-
         logger.success(f"User: {username} successfully registered!")
 
     def login(self, username: str, password: str):
@@ -52,16 +39,3 @@ class SpotipyUserManager(UserManager):
 
         else:
             logger.error(f'User "{username}" does not exist!')
-
-    def sync_user_db(self):
-        if os.path.exists(ManagerConstants.user_db_path):
-            with open(ManagerConstants.user_db_path, "r") as spotipy_fd:
-                for user in spotipy_fd:
-                    pass
-        else:
-            with open(ManagerConstants.user_db_path, "x"):
-                pass
-
-
-xd = SpotipyUserManager()
-xd.signup("hello", "world")
