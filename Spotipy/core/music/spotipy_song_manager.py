@@ -34,15 +34,7 @@ class SpotipySongManager:
             self.__add_album(dictionary["track"]["album"], temp_song)
 
             for artist in dictionary["track"]["artists"]:
-                if artist["id"] not in self.artists:
-                    self.artists[artist["id"]] = Artist(*artist.values())
-
-                temp_artist = self.artists[artist["id"]]
-                if dictionary["track"]["album"]["id"] not in temp_artist.album_ids:
-                    temp_artist.album_ids.append(dictionary["track"]["album"]["id"])
-
-                if temp_artist not in temp_song.artists:
-                    temp_song.artists.append(temp_artist)
+                self.__create_artist(artist, dictionary["track"]["album"]["id"], temp_song)
 
         except KeyError:
             logger.error("Got an invalid song format!")
@@ -62,3 +54,14 @@ class SpotipySongManager:
             self.albums[album["id"]].append([song])  # songs list
             self.albums[album["id"]].append(Album(*album.values()))
             logger.success("Added a new album!")
+
+    def __create_artist(self, artist, album_id, song):
+        if artist["id"] not in self.artists:
+            self.artists[artist["id"]] = Artist(*artist.values())
+
+        temp_artist = self.artists[artist["id"]]
+        if album_id not in temp_artist.album_ids:
+            temp_artist.album_ids.append(album_id)
+
+        if temp_artist not in song.artists:
+            song.artists.append(temp_artist)
