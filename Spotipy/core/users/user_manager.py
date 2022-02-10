@@ -4,6 +4,7 @@ from Spotipy.core.users.spotipy_users.spotipy_user import SpotipyUser
 class UserManager:
     def __init__(self):
         self.users = {}
+        self.current_user = self.__CurrentUser()
 
     def signup(self, username: str, password: str):
         pass
@@ -12,11 +13,11 @@ class UserManager:
         pass
 
     def sign_out(self):
-        self.CurrentUser.curr_user = None
+        self.current_user.curr_user = None
 
-    class CurrentUser:
-        curr_user = None
+    class __CurrentUser:
+        def __init__(self):
+            self.curr_user = None
 
-        @staticmethod
-        def is_authenticated(curr_user: SpotipyUser = curr_user):
-            return curr_user if curr_user is not None else None
+        def is_authenticated(self):
+            return self.curr_user if self.curr_user is not None else None

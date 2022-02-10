@@ -11,24 +11,22 @@ class SpotipyUserManager(UserManager):
         super().__init__()
 
     def signup(self, username: str, password: str, premium: bool = False, artist: bool = True):
-        super(SpotipyUserManager, self).signup(username, password)
+        super().signup(username, password)
+        logger.debug(f"A registration attempt with {username}")
 
         if username in self.users:
-            logger.warning(f"{username} already exists!")
+            logger.warning(f"{username}, username already exists!")
             raise SpotipyUsernameAlreadyExistsException
 
         self.users[username] = SpotipyPremiumUser(username, password) if premium else SpotipyFreeUser(username,
                                                                                                       password)
 
     def login(self, username: str, password: str):
+        logger.debug(f"Login attempt with {username}!")
         if username in self.users:
             if self.users[username].validate_password(password):
+                self.current_user.curr_user = self.users[username]
                 logger.success(f"User: {username} has successfully logged in!")
 
             else:
                 logger.warning(f"A login attempt has been made with : {username} . Incorrect Password!")
-
-
-xd = SpotipyUserManager()
-
-xd.signup("xd", "lmao")
