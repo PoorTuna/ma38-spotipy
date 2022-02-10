@@ -62,6 +62,5 @@ class SpotipyUserManager(UserManager):
             with open(ManagerConstants.user_db_path, "x"):
                 pass
 
-
 # xd = SpotipyUserManager()
 # xd.signup("hello", "world")
