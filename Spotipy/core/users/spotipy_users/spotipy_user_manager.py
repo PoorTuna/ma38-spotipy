@@ -32,10 +32,11 @@ class SpotipyUserManager(UserManager):
 
         if os.path.exists(ManagerConstants.user_db_path):
             with open(ManagerConstants.user_db_path, "a") as spotipy_fd:
-                pass
+                dict_temp = self.users[username].__dict__
+                spotipy_fd.write(json.dumps(self.users[username].__dict__) + "\n")
         else:
             with open(ManagerConstants.user_db_path, "w") as spotipy_fd:
-                pass
+                spotipy_fd.write(self.users[username].__dict__ + "\n")
 
         logger.success(f"User: {username} successfully registered!")
 
@@ -56,11 +57,11 @@ class SpotipyUserManager(UserManager):
         if os.path.exists(ManagerConstants.user_db_path):
             with open(ManagerConstants.user_db_path, "r") as spotipy_fd:
                 for user in spotipy_fd:
-                    # print(self.users, user)
                     pass
         else:
             with open(ManagerConstants.user_db_path, "x"):
                 pass
 
-# xd = SpotipyUserManager()
-# xd.signup("hello", "world")
+
+xd = SpotipyUserManager()
+xd.signup("hello", "world")

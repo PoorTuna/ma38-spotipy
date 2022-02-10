@@ -16,7 +16,7 @@ class ManagerConstants:
 
     logs_path = r"../Resources/Logs/spotipy.log"
     songs_path = r"../Resources/Music/Songs"
-    user_db_path = r"../../Resources/Users/spotipy.db"
+    user_db_path = r"../../../../Resources/Users/spotipy.db"
 
     if os.path.exists(r"spotipy.ini"):
         try:
@@ -24,6 +24,7 @@ class ManagerConstants:
                 logs_path = next(spotipy_fd)
                 songs_path = next(spotipy_fd)
                 user_db_path = next(spotipy_fd)
+                print(user_db_path)
 
         except StopIteration:
             raise SpotipyInvalidConfigFile
