@@ -7,6 +7,6 @@ class User:
         self.username = username
         self.password = bcrypt.hashpw(password.encode(), bcrypt.gensalt())
 
-    def validate_password(self, password):
+    def validate_password(self, password: str):
         logger.debug(f"Login attempt as {self.username}. Checking password validity...")
         return bcrypt.checkpw(password.encode(), self.password)

@@ -7,10 +7,10 @@ from Spotipy.config.constants import UserConstants
 
 
 class SpotipyFreeUser(SpotipyUser):
-    def __init__(self, username, password):
+    def __init__(self, username: str, password: str):
         super().__init__(username, password)
 
-    def add_playlist(self, playlist_name):
+    def add_playlist(self, playlist_name: str):
         if len(self.playlists) <= UserConstants.free_user_playlist_limit:
             logger.error(f"User {self.username} reached max playlists ({UserConstants.free_user_playlist_limit}) !")
             raise SpotipyMusicPlaylistCountException

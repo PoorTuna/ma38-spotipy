@@ -14,7 +14,7 @@ class SpotipySongManager:
         self.artists = {}
         self.songs = {}
 
-    def add_song(self, dictionary: Dict[str, str]):
+    def add_song(self, dictionary: Dict[str, Dict]):
         """
         This function takes the dictionary formatted song and converts it into a series of objects.
         :param dictionary: the dictionary formatted song.
@@ -40,7 +40,7 @@ class SpotipySongManager:
             logger.error("Got an invalid song format!")
             raise SpotipyInvalidSongFormatException
 
-    def __add_album(self, album, song):
+    def __add_album(self, album: Dict[str, str], song: Song):
         """
         This function creates a new album if not exists.
         :param album: The album dict to be added.
@@ -57,7 +57,7 @@ class SpotipySongManager:
             self.albums[album["id"]].append(Album(*album.values()))
             logger.success("Added a new album!")
 
-    def __create_artist(self, artist, album_id, song):
+    def __create_artist(self, artist: Dict[str, str], album_id: str, song: Song):
         """
         This function gets an artist, a song and an album and initializes a new artist.
         :param artist: The artist dict
@@ -75,7 +75,7 @@ class SpotipySongManager:
         if temp_artist not in song.artists:
             song.artists.append(temp_artist)
 
-    def __add_song(self, song, album):
+    def __add_song(self, song: Song, album: Dict[str, str]):
         """
         This function gets a song and an album and adds the song to the album.
         :param song: The song object to be added.

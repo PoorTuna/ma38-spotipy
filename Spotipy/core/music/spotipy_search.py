@@ -20,7 +20,7 @@ class SpotipySearch:
 
         return [self.song_manager.artists[artist] for artist in self.song_manager.artists]
 
-    def get_artist_albums(self, artist_id):
+    def get_artist_albums(self, artist_id: str):
         logger.debug(f"Getting artist's albums from id = {artist_id}...")
         if isinstance(self.user_manager.current_user.curr_user,
                       SpotipyFreeUser) or self.user_manager.current_user.curr_user is None:
@@ -29,7 +29,7 @@ class SpotipySearch:
 
         return [self.song_manager.albums[album_id] for album_id in self.song_manager.artists[artist_id].album_ids]
 
-    def get_top_songs(self, artist_id):
+    def get_top_songs(self, artist_id: str):
         logger.debug(logger.debug(f"Getting top songs from artist id = {artist_id}..."))
         songs_list = []
         for album_id in self.song_manager.artists[artist_id].album_ids:
@@ -47,11 +47,11 @@ class SpotipySearch:
         return sorted([song for song in songs_list],
                       key=lambda x: x.popularity)[:SearchConstants.most_popular_songs_count]
 
-    def get_album_songs(self, album_id):
+    def get_album_songs(self, album_id: str):
         logger.debug(logger.debug(f"Getting every song from album id = {album_id}..."))
         return self.song_manager.albums[album_id][0]
 
     # TODO : Implement genres (find where is the definition of a song genre??).
     # TODO : Implement get top genre songs function with constant variables
-    def get_top_genre_songs(self, genre_name):
+    def get_top_genre_songs(self, genre_name: str):
         pass

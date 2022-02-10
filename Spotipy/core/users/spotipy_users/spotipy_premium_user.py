@@ -8,7 +8,7 @@ class SpotipyPremiumUser(SpotipyUser):
     def __init__(self, username, password):
         super().__init__(username, password)
 
-    def add_playlist(self, playlist_name):
+    def add_playlist(self, playlist_name: str):
         if playlist_name in self.playlists:
             logger.error(f"Playlist already exists with the name : {playlist_name} !")
             raise SpotipyMusicPlaylistNameExistsException
