@@ -56,7 +56,8 @@ class SpotipyUserManager(UserManager):
         if os.path.exists(ManagerConstants.user_db_path):
             with open(ManagerConstants.user_db_path, "r") as spotipy_fd:
                 for user in spotipy_fd:
-                    print(self.users, user)
+                    # print(self.users, user)
+                    pass
         else:
             with open(ManagerConstants.user_db_path, "x"):
                 pass
