@@ -49,6 +49,9 @@ class SpotipySearch:
 
     def get_album_songs(self, album_id: str):
         logger.debug(logger.debug(f"Getting every song from album id = {album_id}..."))
+        if isinstance(self.user_manager.current_user.curr_user,
+                      SpotipyFreeUser) or self.user_manager.current_user.curr_user is None:
+            return self.song_manager.albums[album_id][0][:SearchConstants.free_user_search_limit]
         return self.song_manager.albums[album_id][0]
 
     # TODO : Implement genres (find where is the definition of a song genre??).
